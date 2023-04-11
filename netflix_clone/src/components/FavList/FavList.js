@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import ModalFavMovie from './FavCard/ModalFavMovie/ModalFavMovie'
+import ModalFavMovie from './ModalFavMovie/ModalFavMovie'
 
 export default function FavList() {
     const [favMovies, setFavMovies] = useState([]);
@@ -21,7 +21,8 @@ export default function FavList() {
 
     async function handleDelete(id) {
         const url = process.env.REACT_APP_SERVER_URL;
-        const response = await fetch(`${url}/getMovies`, {
+        console.log(favMovies);
+        const response = await fetch(`${url}/DELETE/${id}`, {
             method: 'DELETE',
             headers: {
                 "Content-Type": "application/json",
@@ -45,7 +46,8 @@ export default function FavList() {
                                 <Card.Body>
                                     <Card.Title>{movie.title}</Card.Title>
                                     <Card.Text>{movie.overview}</Card.Text>
-                                    <Button variant="primary" onClick={handleDelete}>delete from Favorite</Button>
+                                    <Card.Text>{`you comment is :${movie.comment}`}</Card.Text>
+                                    <Button variant="primary" onClick={()=>handleDelete(movie.id)}>delete from Favorite</Button>
                                     <Button variant="primary" onClick={handleShow}>update comment</Button>
                                 </Card.Body>
                             </Card>

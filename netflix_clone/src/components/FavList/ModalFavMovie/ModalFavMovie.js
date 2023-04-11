@@ -11,9 +11,9 @@ export default function ModalFavMovie(props) {
         let url =`${process.env.REACT_APP_SERVER_URL}/UPDATE/${props.moviedata.id}`
         let comment = userComment.current.value
         const response = await fetch(url,{
-            method:"POST",
+            method:"PUT",
             headers:{
-                "Content-Type":"application/json",
+                "Content-Type": "application/json",
             },
             body:JSON.stringify(comment),
         })
