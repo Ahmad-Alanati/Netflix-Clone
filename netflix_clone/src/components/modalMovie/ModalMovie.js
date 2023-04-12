@@ -16,7 +16,7 @@ export default function ModalMovie(props) {
             release_date:props.moviedata.release_date,
             poster_path:props.movieImg,
             overview:props.moviedata.overview,
-            comment:userComment.current.value,
+            comment:userComment.current.value===""?"no comment":userComment.current.value,
         }
         const response = await fetch(url,{
             method:"POST",
@@ -25,9 +25,12 @@ export default function ModalMovie(props) {
             },
             body:JSON.stringify(data),
         })
-        if(response.status===201){
-            alert("successfully added to database");
-        }
+        .then(()=>{
+            alert("the movie added to favorite");
+        })
+        .catch((error)=>{
+            alert(error);
+        })
     }
     return (
         <Modal show={props.show} onHide={props.handleClose} >
